@@ -1,6 +1,16 @@
 {
   "name": "hardhat-project",
   "devDependencies": {
-    "hardhat": "^2.6.2"
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.1",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "dotenv": "^8.6.0",
+    "hardhat": "^2.6.2",
+    "hardhat-deploy": "^0.7.0-beta.39",
+    "web3": "^1.2.9"
+  },
+  "dependencies": {
+    "@chainlink/contracts": "^0.2.1",
+    "hardhat-ethers": "^1.0.1"
   }
 }
