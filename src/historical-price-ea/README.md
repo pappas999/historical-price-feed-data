@@ -1,43 +1,36 @@
-# Chainlink NodeJS External Adapter Template
+# Chainlink Historical Price Data External Adapter
+Chainlink external adapter for obtaining verifiable historical price data. 
 
-This template provides a basic framework for developing Chainlink external adapters in NodeJS. Comments are included to assist with development and testing of the external adapter. Once the API-specific values (like query parameters and API key authentication) have been added to the adapter, it is very easy to add some tests to verify that the data will be correctly formatted when returned to the Chainlink node. There is no need to use any additional frameworks or to run a Chainlink node in order to test the adapter.
+## Installation
 
-## Creating your own adapter from this template
+### Setting Environment Variables
+Set your `RPC_URL` [environment variable.](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html). You can get one for free at [Infura's site.](https://infura.io/). This can be set to a Kovan or Ethereum mainnet RPC endpoint
 
-Clone this repo and change "ExternalAdapterProject" below to the name of your project
+![WARNING](https://via.placeholder.com/15/f03c15/000000?text=+) **WARNING** ![WARNING](https://via.placeholder.com/15/f03c15/000000?text=+)
 
-```bash
-git clone https://github.com/thodges-gh/CL-EA-NodeJS-Template.git ExternalAdapterProject
-```
-
-Enter into the newly-created directory
+Don't commit and push any changes to .env files that may contain sensitive information, such as a private key! If this information reaches a public GitHub repository, someone can use it to check if you have any Mainnet funds in that wallet address, and steal them!
 
 ```bash
-cd ExternalAdapterProject
+git clone https://github.com/pappas999/historical-price-feed-data
+cd historical-price-feed-data/src/historical-price-ea
 ```
 
-You can remove the existing git history by running:
 
-```bash
-rm -rf .git
-```
 
 See [Install Locally](#install-locally) for a quickstart
 
 ## Input Params
-
-- `base`, `from`, or `coin`: The symbol of the currency to query
-- `quote`, `to`, or `market`: The symbol of the currency to convert to
+| Parameter  | Description                                             | Default Value |
+| ---------- | :------------------------------------------------------ | :------------ |
+| proxyAddress      | [Proxy address](https://docs.chain.link/docs/ethereum-addresses/) of price feed                            |  |
+| unixDateTime  | [unix timestamp](https://www.epochconverter.com/) that you wish to know the price data for |               |
 
 ## Output
 
 ```json
 {
  "jobRunID": "278c97ffadb54a5bbb93cfec5f7b5503",
- "data": {
-  "USD": 164.02,
-  "result": 164.02
- },
+ "data": {2,1829,1828,1830},
  "statusCode": 200
 }
 ```
@@ -48,14 +41,6 @@ Install dependencies:
 
 ```bash
 yarn
-```
-
-### Test
-
-Run the local tests:
-
-```bash
-yarn test
 ```
 
 Natively run the application (defaults to port 8080):
@@ -69,7 +54,39 @@ yarn start
 ## Call the external adapter/API server
 
 ```bash
-curl -X POST -H "content-type:application/json" "http://localhost:8080/" --data '{ "id": 0, "data": { "from": "ETH", "to": "USD" } }'
+curl -X POST -H "content-type:application/json" "http://localhost:8080/" --data '{ "id": 0, "data": {  "proxyAddress": "0x9326BFA02ADD2366b30bacB125260Af641031331", "unixDateTime": 1609465692 } }'
+```
+
+## Example JSON Jobspec for Chainlink node
+```
+{
+  "name": "historical-price-data",
+  "initiators": [
+    {
+      "id": 11,
+      "jobSpecId": "a2f91a0f-bdc0-4654-a34e-ea23bbf4f115",
+      "type": "runlog",
+      "params": {
+        "address": "0xb6efece462ea6118a0a7ec1f2a3c7033b1f82967"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "jobSpecId": "a2f91a0fbdc04654a34eea23bbf4f115",
+      "type": "historical-price"
+    },
+    {
+      "jobSpecId": "a2f91a0fbdc04654a34eea23bbf4f115",
+      "type": "ethbytes32"
+    },
+    {
+      "jobSpecId": "a2f91a0fbdc04654a34eea23bbf4f115",
+      "type": "ethtx",
+      "confirmations": 1
+    }
+  ]
+}
 ```
 
 ## Docker
