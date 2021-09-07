@@ -58,6 +58,8 @@ curl -X POST -H "content-type:application/json" "http://localhost:8080/" --data 
 ```
 
 ## Example JSON Jobspec for Chainlink node
+Here is an example Job spec for using the external adapter. 
+
 ```
 {
   "name": "historical-price-data",
@@ -88,6 +90,14 @@ curl -X POST -H "content-type:application/json" "http://localhost:8080/" --data 
   ]
 }
 ```
+
+## Increasing the Chainlink Node API Call Timeout Parameter
+Due to the heavy computation of finding the right aggregator, and doing a binary search over thousands of rounds, sometimes the external adapter can take 15-20 seconds to complete. This can cause the call to the adapter to timeout due to the standard 15 second DEFAULT_HTTP_TIMEOUT parameter. If you find it's timing out, set the DEFAULT_HTTP_TIMEOUT value to a higher number in your node's .env file
+
+```
+DEFAULT_HTTP_TIMEOUT=60
+```
+
 
 ## Docker
 
