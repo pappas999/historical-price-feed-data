@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@chainlink/contracts": "^0.2.1",
+    "@chainlink/token": "^1.1.0",
     "hardhat-ethers": "^1.0.1"
   }
 }
