@@ -1,5 +1,7 @@
 # Chainlink Data Feeds Historical Data
  A Chainlink external adapter and consuming contract that allows obtaining verifiable historical Chainlink Price Feed data based on a proxy address and a search timestamp. Compatible with Ethereum testnet and mainnet, with all aggregator contract versions (including OCR aggregators)
+ 
+ **Please note** this is still in development, and should not be used in a production scenario without thorough testing beforehand.
 
 For instructions on running the external adapter, please head to the [historical-price-data external adapter README](https://github.com/pappas999/historical-price-feed-data/tree/main/src/historical-price-ea). The consumer contract in this repository needs to connect to an oracle running the external adapter in a job.
  
