@@ -35,8 +35,9 @@ contract HistoricalPriceConsumer is ChainlinkClient {
 
     constructor() public {
         setPublicChainlinkToken();
-        oracle = 0xb6EFEcE462EA6118A0A7EC1F2a3c7033b1F82967;
-        jobId = "a2f91a0fbdc04654a34eea23bbf4f115";
+        //set oracle and jobId to the deployed adapter and job run by LinkRiver
+        oracle = 0xF405B99ACa8578B9eb989ee2b69D518aaDb90c1F;
+        jobId = "cc69bee28b51437197ef15387645236e";
         fee = 0; // 0.1 * 10 ** 18; // 0.1 LINK
 
     }
