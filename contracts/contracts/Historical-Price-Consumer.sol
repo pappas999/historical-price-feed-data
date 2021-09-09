@@ -226,9 +226,10 @@ contract HistoricalPriceConsumer is ChainlinkClient {
         require(priceTimestamp < nextPriceTimestamp, "Answer timetamp must be less than next round timestamp");
 
 
-        //next, make sure prev round is before timestamp that was searched, and next round is after
+        //next, make sure prev round is before timestamp that was searched, and next round is after, and answer timestamp is <= search timestamp
         require(previousPriceTimestamp < searchTimestamp, "Previous price timetamp must be less than search timestamp");
         require(searchTimestamp < nextPriceTimestamp, "Search timetamp must be less than next round timestamp");
+        require(priceTimestamp <= searchTimestamp, "Answer timetamp must be less than or equal to searchTimestamp timestamp");
 
         //check if gaps in round numbers, and if so, ensure there's no valid data in between
         if (answerRound - previousRound > 1) {
