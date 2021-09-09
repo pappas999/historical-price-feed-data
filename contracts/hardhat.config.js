@@ -11,6 +11,7 @@
  require("./tasks/fund-link")
  require("./tasks/withdraw-link")
  require('dotenv').config()
+ require("@nomiclabs/hardhat-etherscan");
 
  const MAINNET_RPC_URL = process.env.MAINNET_RPC_URL || process.env.ALCHEMY_MAINNET_RPC_URL || "https://eth-mainnet.alchemyapi.io/v2/your-api-key"
  const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL || "https://eth-rinkeby.alchemyapi.io/v2/your-api-key"

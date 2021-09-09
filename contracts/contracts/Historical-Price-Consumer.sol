@@ -64,6 +64,10 @@ contract HistoricalPriceConsumer is ChainlinkClient {
         //set the timestamp being searched, we will use it for verification after
         searchTimestamp = _unixTime;
 
+        //create proxy contract to be used in the verification
+        proxyAddress = _proxyAddress;
+        priceFeed = AggregatorV3Interface(proxyAddress);
+
         //reset any previous values
         answerRound = 0;
         previousRound = 0;
@@ -181,9 +185,6 @@ contract HistoricalPriceConsumer is ChainlinkClient {
 
 
         //verify the responses
-        //create proxy contract to be used in the verification
-        proxyAddress = 0x9326BFA02ADD2366b30bacB125260Af641031331;
-        priceFeed = AggregatorV3Interface(proxyAddress);
 
         //first get back the responses for each round and make sure its > 0 (ie a valid round)
         (
