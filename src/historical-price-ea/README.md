@@ -27,6 +27,10 @@ See [Install Locally](#install-locally) for a quickstart
 
 ## Output
 
+The output is a JSON object containing the aggregator Phase ID, then answerRound, the previous round before the answer round, and the round after the answer round.
+All rounds are aggregator rounds, not proxy rounds
+
+
 ```json
 {
  "jobRunID": "278c97ffadb54a5bbb93cfec5f7b5503",
