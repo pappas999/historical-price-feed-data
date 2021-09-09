@@ -4,9 +4,11 @@
  **Please note** this is still in development, and should not be used in a production scenario without thorough testing beforehand.
 
 For instructions on running the external adapter, please head to the [historical-price-data external adapter README](https://github.com/pappas999/historical-price-feed-data/tree/main/src/historical-price-ea). The consumer contract in this repository needs to connect to an oracle running the external adapter in a job.
+
+Take note, the solution is setup to use Chainlink multi-variable response, but for now uses a single delimited byte32 response until [this issue](https://github.com/smartcontractkit/chainlink/issues/4938) is resolved
  
 ## Live Deployment
-The consumer contract has been deployed for users to interact with on the Kovan testnet at [the following address](https://kovan.etherscan.io/address/0x836889aF31DeF5cfE35620F410648504FAb3F244#writeContract). You can connect your MetaMask wallet and call the getHistoricalPriceData function, passing in a valid [Kovan price feed](https://docs.chain.link/docs/ethereum-addresses/#Kovan%20Testnet) address, and a [unix timestamp](https://www.epochconverter.com/). A [LinkRiver](https://linkriver.io/) hosted Chainlink node hosting a job and the external adapter will receive the request, and send a response, which can be viewed via the [Read Contract tab](https://kovan.etherscan.io/address/0x836889aF31DeF5cfE35620F410648504FAb3F244#readContract). Values are as follows:
+The consumer contract has been deployed for users to interact with on the Kovan testnet at [the following address](https://kovan.etherscan.io/address/0x5660381b7621Cd2d4DD34866ae94fa9939b243bd#writeContract). You can connect your MetaMask wallet and call the getHistoricalPriceData function, passing in a valid [Kovan price feed](https://docs.chain.link/docs/ethereum-addresses/#Kovan%20Testnet) address, and a [unix timestamp](https://www.epochconverter.com/). A [LinkRiver](https://linkriver.io/) hosted Chainlink node hosting a job and the external adapter will receive the request, and send a response, which can be viewed via the [Read Contract tab](https://kovan.etherscan.io/address/0x836889aF31DeF5cfE35620F410648504FAb3F244#readContract). Values are as follows:
 - priceAnswer: price at that point in time
 - priceTimestamp: timestamp of the rounds answer
 - answerRound: proxy roundId for the answer. This can be verified by passing it into the existing getHistoricalPrice function 
